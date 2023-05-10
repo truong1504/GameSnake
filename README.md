@@ -6,4 +6,4 @@ Trường Đại Học Công Nghệ - ĐHQG Hà Nội
 Bạn sẽ điều khiển rắn ăn thật nhiều con mồi để tích lũy điểm
 # Công cụ
 CodeBlocks  
-Ngôn ngữ c++
+Ngôn ngữ c/c++
