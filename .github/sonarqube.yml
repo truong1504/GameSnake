@@ -1,0 +1,31 @@
+name: SonarQube Scan
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  sonar:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install SonarScanner
+      run: dotnet tool install --global dotnet-sonarscanner
+
+    - name: Run SonarQube analysis
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        dotnet sonarscanner begin /k:"truong1504_GameSnake_62acea7b-1f06-4bd4-942f-4f7e39af0f92" /d:sonar.host.url="https://cd52d16944a7.ngrok-free.app" /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+        dotnet build
+        dotnet sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
