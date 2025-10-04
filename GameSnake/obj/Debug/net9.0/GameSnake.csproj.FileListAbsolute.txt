@@ -1,0 +1,15 @@
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\bin\Debug\net9.0\GameSnake.exe
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\bin\Debug\net9.0\GameSnake.deps.json
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\bin\Debug\net9.0\GameSnake.runtimeconfig.json
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\bin\Debug\net9.0\GameSnake.dll
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\bin\Debug\net9.0\GameSnake.pdb
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.AssemblyInfoInputs.cache
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.AssemblyInfo.cs
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.csproj.CoreCompileInputs.cache
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.sourcelink.json
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.dll
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\refint\GameSnake.dll
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.pdb
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\GameSnake.genruntimeconfig.cache
+C:\Users\MSi\Documents\GitHub\GameSnake\GameSnake\obj\Debug\net9.0\ref\GameSnake.dll
