@@ -1,31 +1,41 @@
-name: Build
+name: Build and Analyze with SonarQube
 
 on:
   push:
     branches:
       - main
-
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
-    name: Build and analyze
+    name: Build and Analyze
     runs-on: windows-latest
-    
+
     steps:
-      - uses: actions/checkout@v4
+      # 1️⃣ Lấy code từ GitHub
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0 # Cần đầy đủ commit để Sonar phân tích chính xác
+
+      # 2️⃣ Cài Java (SonarQube yêu cầu)
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
+          distribution: 'zulu'
+
+      # 3️⃣ Cache SonarQube packages
       - name: Cache SonarQube packages
         uses: actions/cache@v4
         with:
           path: ${{ runner.temp }}\cache
           key: ${{ runner.os }}-sonar
           restore-keys: ${{ runner.os }}-sonar
+
+      # 4️⃣ Cache SonarQube scanner
       - name: Cache SonarQube scanner
         id: cache-sonar-scanner
         uses: actions/cache@v4
@@ -33,15 +43,27 @@ jobs:
           path: ${{ runner.temp }}\scanner
           key: ${{ runner.os }}-sonar-scanner
           restore-keys: ${{ runner.os }}-sonar-scanner
+
+      # 5️⃣ Cài SonarScanner nếu chưa có trong cache
       - name: Install SonarQube scanner
         if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
         shell: powershell
         run: |
           New-Item -Path ${{ runner.temp }}\scanner -ItemType Directory
           dotnet tool update dotnet-sonarscanner --tool-path ${{ runner.temp }}\scanner
-      - name: Build and analyze
+
+      # 6️⃣ Build & Analyze code
+      - name: Build and Analyze with SonarQube
         shell: powershell
         run: |
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin /k:"truong1504_GameSnake_62acea7b-1f06-4bd4-942f-4f7e39af0f92" /d:sonar.token="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
-          dotnet build
-          ${{ runner.temp }}\scanner\dotnet-sonarscanner end /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
+          cd GameSnake
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner begin `
+            /k:"truong1504_GameSnake_62acea7b-1f06-4bd4-942f-4f7e39af0f92" `
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}" `
+            /d:sonar.host.url="${{ secrets.SONAR_HOST_URL }}"
+
+          dotnet restore
+          dotnet build GameSnake.csproj --no-incremental --configuration Release
+
+          ${{ runner.temp }}\scanner\dotnet-sonarscanner end `
+            /d:sonar.token="${{ secrets.SONAR_TOKEN }}"
